@@ -5,7 +5,7 @@ import shutil
 from Bio import AlignIO
 from Bio.Phylo.Applications import RaxmlCommandline
 
-sg.theme('DarkBlack 1')
+sg.theme('DarkBlue 8')
 
 global ingroup_display
 ingroup_display = ""
@@ -19,8 +19,6 @@ global content
 content = []
 global content2
 content2 = []
-global boots
-boots = 0
 
 ######################################################################################################################
 # MENU OPTIONS
@@ -31,8 +29,8 @@ menu_def = [
             'Open Outgroup Fasta File', 'Print Outgroup Fasta File to Screen', 'Nucleotide Composition',
                                      'Run Resampling', 'Fasta Resampling Help', 'Exit']],
            ['RAxML', ['Convert Fasta to Phylip', 'Run RAxML', 'RAxML Help']],
-           ['FastTree', ['Select Folder with Resampled Fasta Files', 'Run FastTree', 'FastTree Help']],
-           ['GMYC', ['Open Folder with ML phylogenies', 'Run GMYC', 'Help']],
+           ['FastTree', ['Run FastTree', 'FastTree Help']],
+           ['GMYC', ['Open Folder with ML phylogenies', 'Run GMYC', 'GMYC Help']],
            ['About', ['Citation', 'Contact']], ]
 
 ######################################################################################################################
@@ -48,7 +46,7 @@ layout_main = [
 # CREATE MAIN WINDOW
 ######################################################################################################################
 
-window_main = sg.Window('SPEDE-RESAMPLER', layout_main, size=(560, 350), icon='bug.ico')
+window_main = sg.Window('SPEDE-SAMPLER', layout_main, size=(560, 350), icon='bug.ico')
 
 while True:
     event, values = window_main.read()
@@ -64,7 +62,17 @@ while True:
         help_fasta_resampling = open('help_fasta_resampling.txt', 'r')
         help_fasta_resampling_content = help_fasta_resampling.read()
         help_fasta_resampling.close()
-        sg.popup_scrolled(help_fasta_resampling_content, title='Help', size=(100, 25))
+        sg.popup_scrolled(help_fasta_resampling_content, title='Fasta Resampling Help', size=(100, 25))
+
+######################################################################################################################
+# HELP WITH FASTA FILE INPUT FOR RESAMPLING
+######################################################################################################################
+
+    if event == 'RAxML Help':
+        help_raxml = open('help_raxml.txt', 'r')
+        help_raxml_content = help_raxml.read()
+        help_raxml.close()
+        sg.popup_scrolled(help_raxml_content, title='RAxML Help', size=(100, 25))
 
 ######################################################################################################################
 # READ IN AN INGROUP FASTA FILE
@@ -388,13 +396,13 @@ while True:
 
     if event == 'Run RAxML':
         layout_raxml = [
-            [sg.Input(), sg.FolderBrowse('Input Folder')],
+            [sg.Input(), sg.FolderBrowse(key='raxml_infolder')],
             [sg.Text('Model:')],
-            [sg.InputCombo(('GTRCAT', 'GTRCAT_GAMMAI', 'GTRCAT_GAMMA', 'GTRGAMMAI', 'GTRGAMMA', 'GTRMIX', 'GTRMIXI'),
+            [sg.InputCombo(('GTRCAT', 'GTRGAMMA'),
                            size=(20, 1), key='raxml_model')],
             [sg.Text('Number of bootstrap iterations:')],
-            [sg.InputText(key='bootstraps', size=(10, 10))],
-            [sg.Submit('Run Analysis')],
+            [sg.InputText(key='bootstraps_raxml', size=(10, 10))],
+            [sg.Submit('Run', key='run_raxml')],
             [sg.ProgressBar(10, orientation='h', size=(20, 20), key='progbar_raxml')]
         ]
         # open a new window with settings
@@ -405,16 +413,16 @@ while True:
             if event is None:
                 break
 
-            raxml_input_folder = values['Input Folder']
-            boots = values['bootstraps']
+            raxml_input_folder = values['raxml_infolder']
+            boots_raxml = values['bootstraps_raxml']
             model = values['raxml_model']
 
-            if event == 'Run Analysis':
+            if event == 'run_raxml':
 
                 if len(raxml_input_folder) == 0:
                     sg.popup_notify('Please select a folder containing your Phylip files.',
                                     location=(650, 400), display_duration_in_ms=6000, fade_in_duration=10, alpha=1)
-                elif len(boots) == 0:
+                elif len(boots_raxml) == 0:
                     sg.popup_notify('Please input the number of bootstraps you wish to run.',
                                     location=(650, 400), display_duration_in_ms=6000, fade_in_duration=10, alpha=1)
                 elif len(model) == 0:
@@ -437,7 +445,9 @@ while True:
                             short_filenames.append(name)
 
                     if len(full_filenames) == 0:
-                        sg.popup_notify("There are no .phy files in the selected folder.")
+                        sg.popup_notify("There are no .phy files in the selected folder.",
+                                        location=(650, 400), display_duration_in_ms=6000, fade_in_duration=10, alpha=1)
+
                     else:
                         j = 0
                         # Loop through each file in the desired folder
@@ -446,15 +456,64 @@ while True:
                             # specify the name of the output tree file:
                             raxml_outfile = short_filenames[j].replace(".phy", "")
                             cmd_raxml = RaxmlCommandline(sequences=raxml_input, name=raxml_outfile, model=model,
-                                                         num_replicates=boots,
+                                                         num_replicates=boots_raxml,
                                                          working_dir=raxml_input_folder + '\\' + 'RAxML_output/')
                             cmd_raxml()
                             j += 1
                             window_raxml['progbar_raxml'].update_bar(j + 1)
 
-                        sg.popup_notify(str(boots) + ' ML trees successfully created. These have been written to the '
-                                        + raxml_input_folder + '\\' + 'RAxML_output folder.', location=(650, 400),
+                        sg.popup_notify(str(boots_raxml) + ' ML trees successfully created. '
+                                                           'These have been written to the ' + raxml_input_folder +
+                                        '\\' + 'RAxML_output folder.', location=(650, 400),
                                         display_duration_in_ms=6000, fade_in_duration=10, alpha=1)
+
+######################################################################################################################
+# FASTTREE
+######################################################################################################################
+
+    if event == 'Run FastTree':
+        layout_fasttree = [
+            [sg.Input(), sg.FolderBrowse(key='fasttree_infolder')],
+            [sg.Text('Number of bootstrap iterations:')],
+            [sg.InputText(key='bootstraps_fasttree', size=(10, 10))],
+            [sg.Submit('Run', key='run_fasttree')],
+            [sg.ProgressBar(10, orientation='h', size=(20, 20), key='progbar_fasttree')]
+        ]
+        # open a new window with settings
+        window_fasttree = sg.Window('FastTree', layout_fasttree, size=(500, 250))
+
+        while True:
+            event, values = window_fasttree.read()
+            if event is None:
+                break
+
+            fasttree_input_folder = values['fasttree_infolder']
+            boots_fasttree = values['bootstraps_fasttree']
+
+            if event == 'run_fasttree':
+
+                if len(fasttree_input_folder) == 0:
+                    sg.popup_notify('Please select a folder containing your Fasta files.',
+                                    location=(650, 400), display_duration_in_ms=6000, fade_in_duration=10, alpha=1)
+
+                elif len(boots_fasttree) == 0:
+                    sg.popup_notify('Please input the number of bootstraps you wish to run.',
+                                    location=(650, 400), display_duration_in_ms=6000, fade_in_duration=10, alpha=1)
+
+                else:
+                    full_filenames = []
+                    short_filenames = []
+
+                    for file in os.listdir(fasttree_input_folder):
+                        name = os.fsdecode(file)
+                        if name.endswith(".fas") or name.endswith(".fasta"):
+                            full_filenames.append(fasttree_input_folder + "\\" + name)
+                            short_filenames.append(name)
+
+                    if len(full_filenames) == 0:
+                        sg.popup_notify("There are no Fasta files in the selected folder.",
+                                        location=(650, 400), display_duration_in_ms=6000, fade_in_duration=10, alpha=1)
+
 
 ######################################################################################################################
 # EXIT THE PROGRAM

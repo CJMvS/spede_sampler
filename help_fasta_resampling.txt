@@ -1,5 +1,5 @@
 **************************************************
-SPEDE-RESAMPLER
+SPEDE-SAMPLER
 **************************************************
 
 Broad Overview of the analysis pipeline:

@@ -1,5 +1,5 @@
 **************************************************
-SPEDE-RESAMPLER
+SPEDE-SAMPLER
 **************************************************
 
 Broad Overview of the analysis pipeline:
@@ -10,4 +10,5 @@ Broad Overview of the analysis pipeline:
 (2) RUN RAxML
 **************************************************
 
-The RAxML program requires files in Phylip format (.phy). Convert these using an online tool, or use the option in SPEDE-SAMPLER to carry out this task. Once this has been done, select the folder where the resampled files (now .phy) are saved.
+The RAxML program requires files in Phylip format (.phy). Convert these using an online tool, or use the option in SPEDE-SAMPLER to carry out this task. Once this has been done, select the folder where the resampled files (now .phy) are saved. Input the evolutionary model of your choice, and the number of bootstrap iterations you wish to run for each tree.
+
