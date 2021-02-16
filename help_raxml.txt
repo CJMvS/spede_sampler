@@ -1,0 +1,13 @@
+**************************************************
+SPEDE-RESAMPLER
+**************************************************
+
+Broad Overview of the analysis pipeline:
+
+(1) Resample .fas files --> (2) Create a Maximum Likelihood phylogeny for each --> (3) Run a GMYC analysis on each tree --> (4) Compare species delimitation across trees
+
+**************************************************
+(2) RUN RAxML
+**************************************************
+
+The RAxML program requires files in Phylip format (.phy). Convert these using an online tool, or use the option in SPEDE-SAMPLER to carry out this task. Once this has been done, select the folder where the resampled files (now .phy) are saved.

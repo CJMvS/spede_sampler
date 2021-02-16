@@ -1,0 +1,53 @@
+**************************************************
+SPEDE-RESAMPLER
+**************************************************
+
+Broad Overview of the analysis pipeline:
+
+(1) Resample .fas files --> (2) Create a Maximum Likelihood phylogeny for each --> (3) Run a GMYC analysis on each tree --> (4) Compare species delimitation across trees
+
+**************************************************
+(1) RESAMPLE FASTA FILES
+**************************************************
+
+Before starting, please ensure that your sequence names do not exceed 10 characters. RAxML requires files in Phylip format, and names will automatically be trimmed. This can result in identical sample names, which will result in an error.
+
+Open an aligned FASTA file (.fas or .fasta extension), and run the analysis by clicking on the 'Run Resampling' option in the menu. Input the number of sequences that you would like to subset from your data, and the number of iterations that you would like to run. Please ensure that your sequence lengths are equal. For example, if your input .fas file contained the following three sequences:
+
+>seq1
+AAAGGGTTTAA
+>seq2
+CCCGGGAAAGT
+>seq3
+GGTTTAAGGGT
+
+If you wish to randomly select two of these sequences, and iterate the process four times, the program will create four .fas files, which could be for example:
+
+iteration1.fas
+>seq2
+CCCGGGAAAGT
+>sequence1
+AAAGGGTTTAA
+
+iteration2.fas
+>seq2
+CCCGGGAAAGT
+>seq3
+GGTTTAAGGGT
+
+iteration3.fas
+>seq3
+GGTTTAAGGGT
+>sequence1
+AAAGGGTTTAA
+
+iteration4.fas
+>seq3
+GGTTTAAGGGT
+>seq2
+CCCGGGAAAGT
+
+**NOTE**: 
+The program automatically creates a folder called 'Iterations' into which these iterations are written. If you run the program again without changing this folder name, it will be overwritten.
+
+If you wish to append outgroups to your iteration files, upload an outgroup .fas file. In the 'Run Resampling' window, select the 'Append Outgroup Sequences?' checkbox before running the process.
