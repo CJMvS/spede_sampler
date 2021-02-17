@@ -1,0 +1,14 @@
+**************************************************
+SPEDE-SAMPLER
+**************************************************
+
+Broad Overview of the analysis pipeline:
+
+(1) Resample .fas files --> (2) Create a Maximum Likelihood phylogeny for each --> (3) Run a GMYC analysis on each tree --> (4) Compare species delimitation across trees
+
+**************************************************
+(2) RUN FASTTREE
+**************************************************
+
+The FastTree program requires files in Fasta format (.fas or .fasta). Select the folder where the resampled files are saved. Input the number of bootstrap iterations you wish to run for each tree.
+
