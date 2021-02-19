@@ -20,3 +20,6 @@ The application contains a help file.
 
 The code for this application can be found here:
 https://github.com/CJMvS/spede-sampler-GMYC-R
+
+**NOTE**
+Please ensure that you have an updated version of R, as the "splits" package will not install in versions 3.6.2 and below.
