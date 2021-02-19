@@ -212,7 +212,10 @@ while True:
                             thymine += 1
                         elif line[i] == "N" or line[i] == "n" or line[i] == "?" or line[i] == "R" or line[i] == "Y" or \
                                 line[i] == "S" or line[i] == "W" or line[i] == "K" or line[i] == "M" or \
-                                line[i] == "B" or line[i] == "D" or line[i] == "H" or line[i] == "V":
+                                line[i] == "B" or line[i] == "D" or line[i] == "H" or line[i] == "V" or \
+                                line[i] == "r" or line[i] == "y" or line[i] == "s" or line[i] == "w" or \
+                                line[i] == "k" or line[i] == "m" or line[i] == "b" or line[i] == "d" or \
+                                line[i] == "h" or line[i] == "v":
                             ambiguous += 1
                         elif line[i] == "-":
                             gap += 1
