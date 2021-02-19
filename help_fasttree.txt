@@ -12,3 +12,5 @@ Broad Overview of the analysis pipeline:
 
 The FastTree program requires files in Fasta format (.fas or .fasta). Select the folder where the resampled files are saved. Input the number of bootstrap iterations you wish to run for each tree.
 
+The standalone code for a console-driven Python script can be found here:
+https://gist.github.com/CJMvS/2790ceb4e3999ac6cf6eba931336901c

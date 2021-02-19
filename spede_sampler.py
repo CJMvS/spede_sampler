@@ -6,7 +6,7 @@ from Bio import AlignIO
 from Bio.Phylo.Applications import RaxmlCommandline
 from Bio.Phylo.Applications import FastTreeCommandline
 
-sg.theme('DarkBlue 8')
+sg.theme('DarkBlue 4')
 
 global ingroup_display
 ingroup_display = ""
@@ -28,10 +28,10 @@ content2 = []
 menu_def = [
            ['Resample Fasta files', ['Open Ingroup Fasta File', 'Print Ingroup Fasta File to Screen',
             'Open Outgroup Fasta File', 'Print Outgroup Fasta File to Screen', 'Nucleotide Composition',
-                                     'Run Resampling', 'Fasta Resampling Help', 'Exit']],
+                                     'Run Resampling', 'Fasta Resampling Help']],
            ['RAxML', ['Convert Fasta to Phylip', 'Run RAxML', 'RAxML Help']],
            ['FastTree', ['Run FastTree', 'FastTree Help']],
-           ['GMYC', ['Open Folder with ML phylogenies', 'Run GMYC', 'GMYC Help']],
+           ['GMYC', ['Run GMYC']],
            ['About', ['Citation', 'Contact']], ]
 
 ######################################################################################################################
@@ -84,6 +84,16 @@ while True:
         help_fasttree_content = help_fasttree.read()
         help_fasttree.close()
         sg.popup_scrolled(help_fasttree_content, title='FastTree Help', size=(100, 25))
+
+######################################################################################################################
+# HELP WITH FASTTREE
+######################################################################################################################
+
+    if event == 'Run GMYC':
+        help_gmyc = open('help_gmyc.txt', 'r')
+        help_gmyc_content = help_gmyc.read()
+        help_gmyc.close()
+        sg.popup_scrolled(help_gmyc_content, title='GMYC Help', size=(100, 25))
 
 ######################################################################################################################
 # READ IN AN INGROUP FASTA FILE
@@ -454,23 +464,27 @@ while True:
                         sg.popup_ok("There are no .phy files in the selected folder.")
 
                     else:
-                        j = 0
-                        # Loop through each file in the desired folder
-                        for file in full_filenames:
-                            raxml_input = file
-                            # specify the name of the output tree file:
-                            raxml_outfile = short_filenames[j].replace(".phy", "")
-                            cmd_raxml = RaxmlCommandline(sequences=raxml_input, name=raxml_outfile, model=model,
-                                                         num_replicates=int(boots_raxml),
-                                                         working_dir=raxml_input_folder + '\\' + 'RAxML_output/')
-                            cmd_raxml()
-                            j += 1
-                            window_raxml['progbar_raxml'].update_bar(j + 1)
+                        try:
+                            j = 0
+                            # Loop through each file in the desired folder
+                            for file in full_filenames:
+                                raxml_input = file
+                                # specify the name of the output tree file:
+                                raxml_outfile = short_filenames[j].replace(".phy", "")
+                                cmd_raxml = RaxmlCommandline(sequences=raxml_input, name=raxml_outfile, model=model,
+                                                             num_replicates=int(boots_raxml),
+                                                             working_dir=raxml_input_folder + '\\' + 'RAxML_output/')
+                                cmd_raxml()
+                                j += 1
+                                window_raxml['progbar_raxml'].update_bar(j + 1)
 
-                        sg.popup_notify('ML trees successfully created using ' + str(boots_raxml) +
+                            sg.popup_ok('Success!', 'ML trees successfully created using ' + str(boots_raxml) +
                                         ' bootstrap repeats. These have been written to the ' + raxml_input_folder +
-                                        '\\' + 'RAxML_output folder.', location=(650, 400),
-                                        display_duration_in_ms=6000, fade_in_duration=10, alpha=1)
+                                        '\\' + 'RAxML_output folder.')
+
+                        except:
+                            sg.popup_ok('RAxML encountered an error. This is most likely due to your input '
+                                        'files having too few sequences, or very short sequence lengths.')
 
 ######################################################################################################################
 # FASTTREE
@@ -481,6 +495,8 @@ while True:
             [sg.Input(), sg.FolderBrowse(key='fasttree_infolder')],
             [sg.Text('Number of bootstrap iterations:')],
             [sg.InputText(key='bootstraps_fasttree', size=(10, 10))],
+            [sg.Checkbox('GTR', key='gtr'), sg.Checkbox('Gamma', key='gamma'),
+             sg.Checkbox('Nucleotide', default=True, key='nt', tooltip='Deselect for protein data')],
             [sg.Submit('Run', key='run_fasttree')],
             [sg.ProgressBar(10, orientation='h', size=(20, 20), key='progbar_fasttree')]
         ]
@@ -532,35 +548,50 @@ while True:
                         # set the file path for the FastTree.exe file
                         fasttree_exe = os.path.dirname(os.path.abspath('spede_sampler.py')) + '\\' + 'FastTree.exe'
 
+                    try:
                         q = 0
-
                         # Loop through each file in the desired folder
                         for file in full_filenames:
                             fasttree_fastafile = file
                             # specify the location of the output tree file:
                             if file.endswith('.fas'):
-                                fasttree_outfile = fasttree_input_folder + '\\' + 'FastTree_output/' + short_filenames[q].replace('.fas', '.tre')
+                                fasttree_outfile = fasttree_input_folder + '\\' + 'FastTree_output/' + \
+                                                    short_filenames[q].replace('.fas', '.tre')
                             elif file.endswith('.FASTA'):
-                                fasttree_outfile = fasttree_input_folder + '\\' + 'FastTree_output/' + short_filenames[q].replace('.FASTA', '.tre')
+                                fasttree_outfile = fasttree_input_folder + '\\' + 'FastTree_output/' + \
+                                                    short_filenames[q].replace('.FASTA', '.tre')
                             elif file.endswith('.fasta'):
-                                fasttree_outfile = fasttree_input_folder + '\\' + 'FastTree_output/' + short_filenames[q].replace('.fasta', '.tre')
+                                fasttree_outfile = fasttree_input_folder + '\\' + 'FastTree_output/' + \
+                                                    short_filenames[q].replace('.fasta', '.tre')
                             # Modify parameters as desired
-                            cmd_fasttree = FastTreeCommandline(fasttree_exe, nt=True, gtr=True, gamma=True,
-                                                               input=fasttree_fastafile, out=fasttree_outfile,
-                                                               boot=int(boots_fasttree))
+                            cmd_fasttree = FastTreeCommandline(fasttree_exe, nt=values['nt'], gtr=values['gtr'],
+                                                               gamma=values['gamma'], input=fasttree_fastafile,
+                                                               out=fasttree_outfile, boot=int(boots_fasttree))
                             cmd_fasttree()
                             q += 1
                             window_fasttree['progbar_fasttree'].update_bar(q + 1)
 
-                        sg.popup_ok('ML trees successfully created with ' + str(boots_fasttree) +
+                        sg.popup_ok('Success!', 'ML trees successfully created with ' + str(boots_fasttree) +
                                     ' bootstrap repeats. These have been written to the ' + fasttree_input_folder +
                                     '\\' + 'FastTree_output folder.')
 
+                    except:
+                        sg.popup_ok('FastTree encountered an error.')
+
 ######################################################################################################################
-# EXIT THE PROGRAM
+# CONTACT DETAILS WINDOW
 ######################################################################################################################
 
-    if event == 'Exit':
-        window_main.close()
+    if event == 'Contact':
+        sg.popup_ok('Report bugs or make suggestions',  'Clarke van Steenderen \nemail: vsteenderen@gmail.com or '
+                                                        'g14v1511@campus.ru.ac.za')
+
+######################################################################################################################
+# CITATION DETAILS WINDOW
+######################################################################################################################
+
+    if event == 'Citation':
+        sg.popup_ok('Cite', 'Please cite this program as follows: \nvan Steenderen, CJM. SPEDE-SAMPLER: '
+                            'assess sampling effects on species delimitation, version 1.1, 2020.')
 
 window_main.close()
