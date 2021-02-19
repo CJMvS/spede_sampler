@@ -32,7 +32,7 @@ menu_def = [
            ['RAxML', ['Convert Fasta to Phylip', 'Run RAxML', 'RAxML Help']],
            ['FastTree', ['Run FastTree', 'FastTree Help']],
            ['GMYC', ['Run GMYC']],
-           ['About', ['Citation', 'Contact']], ]
+           ['About', ['Overview', 'Citation', 'Contact']], ]
 
 ######################################################################################################################
 # MAIN WINDOW LAYOUT
@@ -54,6 +54,16 @@ while True:
 
     if event is None:
         break
+
+######################################################################################################################
+# HELP WITH FASTA FILE INPUT FOR RESAMPLING
+######################################################################################################################
+
+    if event == 'Overview':
+        overview = open('overview.txt', 'r')
+        overview_content = overview.read()
+        overview.close()
+        sg.popup_scrolled(overview_content, title='Fasta Resampling Help', size=(100, 25))
 
 ######################################################################################################################
 # HELP WITH FASTA FILE INPUT FOR RESAMPLING
