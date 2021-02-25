@@ -3,7 +3,7 @@
 ![alt text](https://github.com/CJMvS/spede-sampler-py/blob/main/spede_sampler.png?raw=true)
 
 ---
-### FUNCTIONALITY
+### :pencil2: FUNCTIONALITY
 ---
 
 SPEDE-SAMPLER is a GUI program written in Python and R for assessing sampling effects on species delimitation using the GMCY method. The program offers the following:
@@ -22,12 +22,12 @@ Functions (1) and (2) are carried out in the main SPEDE-SAMPLER interface, and f
 (1) Resample .fas files --> (2) Create a Maximum Likelihood phylogeny for each --> (3) Run a GMYC analysis on each tree --> (4) Compare species delimitation across trees
 
 ---
-### DOWNLOAD
+### :floppy_disk: DOWNLOAD
 ---
 
 Download the content of this repository, unzip the folder, and open the **spede_sampler.exe** file to run the program.
 
-:warning: Temporarily disable your antivirus before running this executable file, as it may incorrectly identify it as malware.
+:heavy_exclamation_mark: Temporarily disable your antivirus before running this executable file, as it may incorrectly identify it as malware.
 
 ---
 ### (1) RESAMPLE FASTA FILES
