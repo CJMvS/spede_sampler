@@ -347,7 +347,7 @@ while True:
                             counter += 1
                             f1.close()
 
-                            window_fasta_resample['progbar_fasta'].update_bar(counter + 1)
+                            window_fasta_resample['progbar_fasta'].update_bar(counter, max=int(iterations))
 
                         sg.popup_notify(str(iterations) + ' files successfully written to ' + save_dir +
                                         '/Iterations', location=(650, 400), display_duration_in_ms=6000,
