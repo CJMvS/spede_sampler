@@ -1,10 +1,8 @@
 import PySimpleGUI as sg
 import os
 import random
-import math
 import shutil
 from Bio import AlignIO
-# from Bio import SeqIO
 from Bio.Phylo.Applications import RaxmlCommandline
 from Bio.Phylo.Applications import FastTreeCommandline
 
@@ -133,6 +131,10 @@ while True:
 
             content = ingroup_display.splitlines()
             content2 = []
+
+            for i in range(1, len(content) + 1):
+                if i % 2 == 0:
+                    content2.append(content[i - 2].strip() + " " + content[i - 1].strip())
 
             # get the number of sequences in the file
             n = 0
@@ -350,11 +352,8 @@ while True:
                         # if it does
                         if os.path.exists(save_dir + '\\' + 'Iterations' + '_' + perc + '/'):
                             shutil.rmtree(save_dir + '\\' + 'Iterations' + '_' + perc + '/')
-                        os.mkdir('Iterations' + '_' + perc + '/')
 
-                        for i in range(1, len(content) + 1):
-                            if i % 2 == 0:
-                                content2.append(content[i - 2].strip() + " " + content[i - 1].strip())
+                        os.mkdir('Iterations' + '_' + perc + '/')
 
                         f1 = ()
                         counter = 0
@@ -464,7 +463,8 @@ while True:
                            size=(20, 1), key='raxml_model_single')],
             [sg.Text('Number of bootstrap iterations (please insert a value greater than zero):')],
             [sg.InputText(key='bootstraps_raxml_single', size=(10, 10))],
-            [sg.Checkbox('Set seed?', key='raxml_seed_single', default=False)],
+            [sg.Checkbox('Set seed?', key='raxml_seed_single', default=False, tooltip='Select this if you want '
+                            'the results to be reproducible if you run this again.')],
             [sg.Submit('Run', key='run_raxml_single')]
             ]
 
@@ -550,7 +550,8 @@ while True:
                            size=(20, 1), key='raxml_model')],
             [sg.Text('Number of bootstrap iterations (please insert a value greater than zero):')],
             [sg.InputText(key='bootstraps_raxml', size=(10, 10))],
-            [sg.Checkbox('Set seed?', key='raxml_seed', default=False)],
+            [sg.Checkbox('Set seed?', key='raxml_seed', default=False, tooltip='Select this if you want '
+                            'the results to be reproducible if you run this again.')],
             [sg.Submit('Run', key='run_raxml')],
             [sg.ProgressBar(max_value=len(full_filenames_raxml), orientation='h', size=(20, 20), key='progbar_raxml')]
         ]
@@ -630,7 +631,7 @@ while True:
 
                             sg.popup_ok('Success!', str(len(full_filenames_raxml)) +
                                         ' ML trees successfully created using ' + str(boots_raxml) +
-                                        ' bootstrap repeats. These have been written to the ' + raxml_input_folder +
+                                        ' bootstrap repeats. This has been written to the ' + raxml_input_folder +
                                         '\\' + 'RAxML_output folder.')
 
                         except:
@@ -652,7 +653,8 @@ while True:
                                                    'default Jukes-Cantor model \n(nucleotide data only)'),
              sg.Checkbox('Gamma', key='gamma', tooltip='Apply the discrete gamma model'),
              sg.Checkbox('Nucleotide', default=True, key='nt', tooltip='Deselect for protein data'),
-             sg.Checkbox('Seed?', default=False, key='fasttree_seed')],
+             sg.Checkbox('Seed?', default=False, key='fasttree_seed', tooltip='Select this if you want '
+                            'the resampling results to be reproducible if you run this again.')],
             [sg.Submit('Run', key='run_fasttree')],
             [sg.ProgressBar(max_value=len(full_filenames_fasttree), orientation='h', size=(20, 20),
                             key='progbar_fasttree')]
@@ -665,16 +667,16 @@ while True:
             if event_fasttree is None:
                 break
 
-            fasttree_input_folder = values_fasttree['fasttree_infolder']
-            boots_fasttree = values_fasttree['bootstraps_fasttree']
-
             if event_fasttree == 'run_fasttree':
 
                 try:
+                    boots_fasttree = values_fasttree['bootstraps_fasttree']
                     boots_fasttree_int = int(boots_fasttree)
                 except ValueError:
                     sg.popup_ok('Error', 'Bootstrap value must be an integer.')
                     continue
+
+                fasttree_input_folder = values_fasttree['fasttree_infolder']
 
                 if len(fasttree_input_folder) == 0:
                     sg.popup_ok('Select Folder', 'Please select a folder containing your Fasta files.')
@@ -822,7 +824,7 @@ while True:
                     cmd_fasttree()
 
                     sg.popup_ok('Success! ML tree successfully created with ' + str(boots_fasttree) +
-                                ' bootstrap repeats. These have been written to the ' + os.path.basename(fasttree_input_file) +
+                                ' bootstrap repeats. This has been written to the ' + os.path.basename(fasttree_input_file) +
                                 '\\' + 'FastTree_single folder.')
 
                 except:
