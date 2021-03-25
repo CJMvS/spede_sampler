@@ -1,4 +1,4 @@
-![alt text](https://github.com/CJMvS/spede-sampler-py/blob/main/spede_sampler_R_logo2.png?raw=true)
+![alt text](https://github.com/CJMvS/spede-sampler-py/blob/main/spede_sampler_logo.png?raw=true)
 
 ---
 ### :pencil2: FUNCTIONALITY
