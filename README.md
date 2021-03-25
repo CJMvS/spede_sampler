@@ -1,5 +1,12 @@
 ![alt text](https://github.com/CJMvS/spede-sampler-py/blob/main/spede_sampler_logo.png?raw=true)
 
+*Clarke van Steenderen* <br />
+*Department of Zoology and Entomology* <br />
+[*The Centre for Biological Control*](https://www.ru.ac.za/centreforbiologicalcontrol/) <br />
+*Rhodes University, Grahamstown, Eastern Cape, South Africa* <br />
+*2021* <br />
+*e-mail:* vsteenderen@gmail.com
+
 ---
 ### :pencil2: FUNCTIONALITY
 ---
