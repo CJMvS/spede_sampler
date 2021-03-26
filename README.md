@@ -131,6 +131,7 @@ In R, follow these steps:
 
 ``` r
 library(ape)
+setwd("path/of/your/choice")
 
 start_caddis = 513774
 end_caddis = 513874
