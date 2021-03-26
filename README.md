@@ -16,7 +16,7 @@ SPEDE-SAMPLER is a GUI program written in Python and R for assessing sampling ef
 1. Reads in an aligned Fasta file, and randomly select *n* sequences *p* times. These files are saved in an output folder.
 For example, a sequence alignment of ten COI sequences might be uploaded. The user may wish to randomly select 50% of this dataset without replacement, and repeat this process 15 times. The program will thus write out 15 Fasta files to a folder, where each file contains a random selection of five sequences.
 
-2. Loops through the output folder to produce a Maximum Likelihood (ML) phylogeny for each resampled Fasta file. There are two ML programs available: FastTree and RAxML.
+2. Loops through the output folder to produce a Maximum Likelihood (ML) phylogeny for each resampled Fasta file. The two ML programs available are FastTree and RAxML.
 
 3. Loops through each ML phylogeny and runs a GMYC species delimitation analysis on it in order to estimate the number of clusters and entities present.
 
@@ -32,7 +32,7 @@ Functions (1) and (2) are carried out in the main SPEDE-SAMPLER interface, and f
 
 Download the content of this repository, unzip the folder, and open the **spede_sampler.py** file in Python to run the program.
 
-To run the executable file version of the program, download the **spede_sampler.exe** file [here](https://drive.google.com/drive/folders/1wrN7-eYNBcLC5ANuu5DmVPbYSElppJtc?usp=sharing) and move it to the unzipped folder (or download the entire Google Drive folder and just open the spede_sampler.exe file from there). Open this file to run the program without directly running it through Python. 
+To run the executable file version of the program, download the **spede_sampler.exe** file [here](https://drive.google.com/drive/folders/1wrN7-eYNBcLC5ANuu5DmVPbYSElppJtc?usp=sharing) and move it to the unzipped folder (or download the entire Google Drive folder and just open the spede_sampler.exe file from there). Open this executable file to run the program. 
 
 :heavy_exclamation_mark: Temporarily disable your antivirus before running this executable file, as it may incorrectly identify it as malware.
 
@@ -40,9 +40,11 @@ To run the executable file version of the program, download the **spede_sampler.
 ### (1) RESAMPLE FASTA FILES
 ---
 
-Before starting, please ensure that your sequence names do not exceed 10 characters. RAxML requires files in Phylip format, and names will automatically be trimmed. This can result in identical sample names, which will result in an error.
+Before starting, please ensure that your sequence names do not exceed 10 characters. RAxML requires files in Phylip format, and names will automatically be trimmed. This can result in identical sample names, which will cause errors.
 
-Open an aligned FASTA file (.fas or .fasta extension), and run the analysis by clicking on the 'Run Resampling' option in the menu. Input the number of sequences that you would like to subset from your data, and the number of iterations that you would like to run. Please ensure that your sequence lengths are equal. For example, if your input .fas file contained the following three sequences:
+Open an aligned FASTA file (.fas or .fasta extension), and run the analysis by clicking on the 'Run Resampling' option in the menu. Input the number of sequences that you would like to subset from your data, and the number of iterations that you would like to run. Please ensure that your sequence lengths are equal. 
+
+For example, if your input .fas file contained the following three sequences:
 
 >seq1<br>
 AAAGGGTTTAA<br>
@@ -121,7 +123,7 @@ shiny::runGitHub("spede-sampler", "CJMvS", ref="main") # access the GUI app hous
 See the GitHub repository for the application [here](https://github.com/CJMvS/spede-sampler), with a detailed README and worked example.
 
 ---
-### 💡 QUICK TIP TO DOWNLOAD MULTIPLE GENBANK SEQUENCES FROM R CHOP-CHOP
+### 💡 QUICK TIP: DOWNLOAD MULTIPLE GENBANK SEQUENCES FROM R
 ---
 
 As an example, let's say that you want to download [100 caddisfly COI sequences](https://bioone.org/journals/freshwater-science/volume-26/issue-4/06-089.1/Associating-larvae-and-adults-of-Chinese-Hydropsychidae-caddisflies-Insecta-Trichoptera/10.1899/06-089.1.full) with Genbank IDs EF513774 to EF513874.
