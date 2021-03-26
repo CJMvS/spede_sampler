@@ -118,8 +118,7 @@ install.packages("shiny") # install the R Shiny package
 library(shiny) # access the library
 shiny::runGitHub("spede-sampler", "CJMvS", ref="main") # access the GUI app housed on GitHub
 ```
-The raw code for this app is available here:
-https://github.com/CJMvS/spede-sampler 
+See the GitHub repository for the application [here](https://github.com/CJMvS/spede-sampler), with a detailed README and worked example.
 
 ---
 ### 💡 QUICK TIP TO DOWNLOAD MULTIPLE GENBANK SEQUENCES FROM R CHOP-CHOP
