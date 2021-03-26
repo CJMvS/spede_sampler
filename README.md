@@ -18,7 +18,7 @@ For example, a sequence alignment of ten COI sequences might be uploaded. The us
 
 2. Loops through the output folder to produce a Maximum Likelihood (ML) phylogeny for each resampled Fasta file. There are two ML programs available: FastTree and RAxML.
 
-3. Loops through each ML phylogeny and run a GMYC species delimitation analysis on it in order to estimate the number of clusters and entities present.
+3. Loops through each ML phylogeny and runs a GMYC species delimitation analysis on it in order to estimate the number of clusters and entities present.
 
 Functions (1) and (2) are carried out in the main SPEDE-SAMPLER interface, and function (3) has been written as an R Shiny application.
 
