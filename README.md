@@ -141,10 +141,11 @@ k = 0
 for (i in start_caddis:end_caddis){
   caddis_ids[k] = paste("EF", i, sep = "")
   k = k + 1
-  
+ } 
+ 
 caddis_seqs = ape::read.GenBank(caddis_ids)
 write.dna(caddis_seqs, file ="caddis.fasta", format = "fasta", append = FALSE, nbcol = 6, colsep = "", colw = 10)
-} 
+
 ```
 ---
 ### CONTACT AND CITATION
