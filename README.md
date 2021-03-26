@@ -113,15 +113,37 @@ https://gist.github.com/CJMvS/2790ceb4e3999ac6cf6eba931336901c
 
 GMYC analyses need to be run in R, and so a separate R Shiny application needs to be launched. To do this, open R, and run the following three lines of code:
 
-`install.packages("shiny") # install the R Shiny package`
-
-`library(shiny) # access the library`
-
-`shiny::runGitHub("spede-sampler", "CJMvS", ref="main") # access the GUI app housed on GitHub`
+`install.packages("shiny") # install the R Shiny package` <br>
+`library(shiny) # access the library` <br> 
+`shiny::runGitHub("spede-sampler", "CJMvS", ref="main") # access the GUI app housed on GitHub` <br>
 
 The raw code for this app is available here:
 https://github.com/CJMvS/spede-sampler 
 
+---
+### 💡 QUICK TIP TO DOWNLOAD MULTIPLE GENBANK SEQUENCES FROM R CHOP-CHOP
+---
+
+As an example, let's say that you want to download [100 caddisfly COI sequences](https://bioone.org/journals/freshwater-science/volume-26/issue-4/06-089.1/Associating-larvae-and-adults-of-Chinese-Hydropsychidae-caddisflies-Insecta-Trichoptera/10.1899/06-089.1.full) with Genbank IDs EF513774 to EF513874.
+
+In R, follow these steps:
+
+``` r
+library(ape)
+
+start_caddis = 513774
+end_caddis = 513874
+caddis_ids = c()
+
+k = 0
+for (i in start_caddis:end_caddis){
+  caddis_ids[k] = paste("EF", i, sep = "")
+  k = k + 1
+  
+caddis_seqs = ape::read.GenBank(caddis_ids)
+write.dna(caddis_seqs, file ="caddis.fasta", format = "fasta", append = FALSE, nbcol = 6, colsep = "", colw = 10)
+} 
+```
 ---
 ### CONTACT AND CITATION
 --- 
