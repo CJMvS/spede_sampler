@@ -113,10 +113,11 @@ https://gist.github.com/CJMvS/2790ceb4e3999ac6cf6eba931336901c
 
 GMYC analyses need to be run in R, and so a separate R Shiny application needs to be launched. To do this, open R, and run the following three lines of code:
 
-`install.packages("shiny") # install the R Shiny package` <br>
-`library(shiny) # access the library` <br> 
-`shiny::runGitHub("spede-sampler", "CJMvS", ref="main") # access the GUI app housed on GitHub` <br>
-
+``` r
+install.packages("shiny") # install the R Shiny package
+library(shiny) # access the library
+shiny::runGitHub("spede-sampler", "CJMvS", ref="main") # access the GUI app housed on GitHub
+```
 The raw code for this app is available here:
 https://github.com/CJMvS/spede-sampler 
 
