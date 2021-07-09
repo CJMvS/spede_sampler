@@ -7,6 +7,22 @@
 *2021* <br />
 *e-mail:* vsteenderen@gmail.com
 
+## INSTALLATION
+
+From source 
+
+```
+git clone https://github.com/CJMvS/spede-sampler-py.git
+cd spede-sampler-py
+pip install -e 
+```
+
+## To Load the Data and Run
+
+```
+python spede_sampler.py
+```
+
 ---
 ### :pencil2: FUNCTIONALITY
 ---
