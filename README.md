@@ -20,7 +20,7 @@ pip install -e
 ```
 
 ---
-## RUN THE APPLICATION
+### RUN THE APPLICATION
 ---
 
 ```
