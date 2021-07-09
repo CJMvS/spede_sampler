@@ -11,7 +11,7 @@
 ### INSTALLATION
 ---
 
-From source 
+#### From source 
 
 ```
 git clone https://github.com/CJMvS/spede-sampler-py.git
