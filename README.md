@@ -7,7 +7,9 @@
 *2021* <br />
 *e-mail:* vsteenderen@gmail.com
 
-## INSTALLATION
+---
+### INSTALLATION
+---
 
 From source 
 
@@ -17,7 +19,9 @@ cd spede-sampler-py
 pip install -e 
 ```
 
-## To Load the Data and Run
+---
+## RUN THE APPLICATION
+---
 
 ```
 python spede_sampler.py
