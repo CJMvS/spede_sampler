@@ -55,7 +55,7 @@ menu_def = [
 ######################################################################################################################
 
 layout_main = [
-    [sg.Menu(menu_def, tearoff=False, background_color="lightgreen")],
+    [sg.Menu(menu_def, tearoff=False, background_color="PaleGreen3")],
     [sg.Image('spede_sampler_R_logo2.png')]
 ]
 
@@ -63,7 +63,7 @@ layout_main = [
 # CREATE MAIN WINDOW
 ######################################################################################################################
 
-window_main = sg.Window('SPEDE-SAMPLER', layout_main, size=(560, 350), icon='bug.ico')
+window_main = sg.Window('SPEDE-SAMPLER', layout_main, size=(570, 380), icon='bug.ico')
 
 while True:
     event, values = window_main.read()
