@@ -176,4 +176,3 @@ For suggestions, or bug-reporting, please contact me at vsteenderen@gmail.com.
 
 Please cite as:
 
-van Steenderen, CJM. SPEDE-SAMPLER: assess sampling effects on species delimitation, version 1.1, 2020.
