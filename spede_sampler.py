@@ -56,7 +56,7 @@ menu_def = [
 
 layout_main = [
     [sg.Menu(menu_def, tearoff=False, background_color="lightgreen")],
-    [sg.Image('spede_sampler_logo.png')]
+    [sg.Image('spede_sampler_R_logo2.png')]
 ]
 
 ######################################################################################################################
