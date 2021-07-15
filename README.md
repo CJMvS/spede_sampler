@@ -23,6 +23,8 @@ pip install -e
 ### RUN THE APPLICATION
 ---
 
+Download [Python](https://www.python.org/downloads/) onto your computer, and then run:
+
 ```
 python spede_sampler.py
 ```
