@@ -10,16 +10,23 @@ Broad Overview of the analysis pipeline:
 (3) RUN GMYC ANALYSES
 **************************************************
 
-GMYC analyses are run using the R "ape" and "splits" packages. In order to run this step, open R and run the following lines of code:
+GMYC analyses are run using the R "ape" and "splits" packages. In order to run this step:
 
-install.packages("shiny") # install the R Shiny package
-library(shiny) # access the library
-shiny::runGitHub("spede-sampler", "CJMvS", ref="main") # access the GUI app housed on GitHub
+- Download and unzip the spede_sampler_R repository
+- Open R, and install (if applicable) and load the shiny library
+- Change the working directory to the downloaded folder
+
+Run the following lines of code in the R console:
+
+install.packages("shiny")
+library(shiny)
+setwd("path/to/spede_sampler_R-main")
+shiny::runApp(appDir = getwd())
 
 The application contains a help file.
 
 The code for this application can be found here:
-https://github.com/CJMvS/spede-sampler-GMYC-R
+https://github.com/CJMvS/spede_sampler_R
 
 **NOTE**
 Please ensure that you have an updated version of R, as the "splits" package will not install in versions 3.6.2 and below.
