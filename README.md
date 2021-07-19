@@ -8,7 +8,7 @@
 *e-mail:* vsteenderen@gmail.com
 
 ---
-### INSTALLATION
+### INSTALLATION OF THE PYTHON APPLICATION
 ---
 
 #### From source 
