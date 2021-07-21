@@ -49,16 +49,6 @@ Functions (1) and (2) are carried out in the main SPEDE-SAMPLER interface, and f
 (1) Resample .fas files --> (2) Create a Maximum Likelihood phylogeny for each --> (3) Run a GMYC analysis on each tree --> (4) Compare species delimitation across trees
 
 ---
-### :floppy_disk: DOWNLOAD
----
-
-Download the content of this repository, unzip the folder, and open the **spede_sampler.py** file in Python to run the program.
-
-To run the executable file version of the program, download the **spede_sampler.exe** file [here](https://drive.google.com/drive/folders/1wrN7-eYNBcLC5ANuu5DmVPbYSElppJtc?usp=sharing) and move it to the unzipped folder (or download the entire Google Drive folder and just open the spede_sampler.exe file from there). Open this executable file to run the program. 
-
-:heavy_exclamation_mark: Temporarily disable your antivirus before running this executable file, as it may incorrectly identify it as malware.
-
----
 ### (1) RESAMPLE FASTA FILES
 ---
 
