@@ -11,7 +11,7 @@
 ### INSTALLATION OF THE PYTHON APPLICATION
 ---
 
-#### From source 
+#### FROM SOURCE 
 
 ```
 git clone https://github.com/CJMvS/spede_sampler.git
@@ -29,11 +29,15 @@ Download [Python](https://www.python.org/downloads/) onto your computer, and the
 python spede_sampler.py
 ```
 
+**ALTERNATIVELY**
+
+Download the SPEDE-Sampler executable file [here](https://drive.google.com/file/d/1faAVywdPUXRDUcs0d3QhtAdLH1rozegL/view?usp=sharing), and save it in the same directory as the downloaded GitHub repository. Open the .exe file to run the program.
+
 ---
 ### :pencil2: FUNCTIONALITY
 ---
 
-SPEDE-SAMPLER is a GUI program written in Python and R for assessing sampling effects on species delimitation using the GMCY method. The program offers the following:
+SPEDE-Sampler is a GUI program written in Python and R for assessing sampling effects on species delimitation using the GMCY method. The program offers the following:
 
 1. Reads in an aligned Fasta file, and randomly select *n* sequences *p* times. These files are saved in an output folder.
 For example, a sequence alignment of ten COI sequences might be uploaded. The user may wish to randomly select 50% of this dataset without replacement, and repeat this process 15 times. The program will thus write out 15 Fasta files to a folder, where each file contains a random selection of five sequences.
