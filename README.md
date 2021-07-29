@@ -14,7 +14,7 @@
 #### FROM SOURCE 
 
 ```
-git clone https://github.com/CJMvS/spede_sampler.git
+git clone https://github.com/clarkevansteenderen/spede_sampler.git
 cd spede_sampler
 pip install -e 
 ```
