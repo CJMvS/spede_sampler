@@ -104,8 +104,7 @@ The program automatically creates a folder called 'Iterations' into which these 
 
 If you wish to append outgroups to your iteration files, upload an outgroup .fas file. In the 'Run Resampling' window, select the 'Append Outgroup Sequences?' checkbox before running the process.
 
-The standalone code for a console-driven Python script can be found here:
-https://gist.github.com/CJMvS/badf0c340c862f46db55a7b3c240a0f0
+The **Example data** folder contains an aligned fasta file with 142 *12S* rRNA sequences from cochineal insects (Hemiptera: Dactylopiidae).
 
 ---
 ### (2) RUN RAxML
